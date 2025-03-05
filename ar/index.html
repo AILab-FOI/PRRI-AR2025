@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>AILab-FOI AR</title>
+<script src="ex/js/aframe.min.js"></script>
+<script src="ex/js/aframe-ar.js"></script>
+<style>
+  .arjs-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arjs-loader div {
+    text-align: center;
+    font-size: 1.25em;
+    color: white;
+  }
+</style>
+</head>
+<body style="margin : 0px; overflow: hidden;">
+
+  <a-scene
+    vr-mode-ui="enabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+  >
+    <a-marker type="pattern" url="augmented-artisan.patt" smooth="true" smoothCount="20" smoothTolerance="0.01" smoothThreshold="10">
+        <a-entity
+        gltf-model="augmented-artisan.glb"
+        scale="1 1 1"
+        position="0 -1 0"
+        material="transparent: true; opacity: 0.6;"
+      >
+      </a-entity>
+    </a-marker>
+    <a-marker type="pattern" url="futuristic-foreseer.patt" smooth="true" smoothCount="20" smoothTolerance="0.01" smoothThreshold="10">
+        <a-entity
+        gltf-model="futuristic-foreseer.glb"
+        scale="1 1 1"
+        position="0 -1 0"
+        material="transparent: true; opacity: 0.6;"
+      >
+      </a-entity>
+    </a-marker>
+    
+    <a-marker type="pattern" url="spectral-headmaster.patt" smooth="true" smoothCount="20" smoothTolerance="0.01" smoothThreshold="10">
+        <a-entity
+        gltf-model="spectral-headmaster.glb"
+        scale="1 1 1"
+        position="0 -1 0"
+        material="transparent: true; opacity: 0.6;"
+      >
+      </a-entity>
+    </a-marker>
+    
+    <a-marker type="pattern" url="virtual-visionary.patt" smooth="true" smoothCount="20" smoothTolerance="0.01" smoothThreshold="10">
+        <a-entity
+        gltf-model="virtual-visionary.glb"
+        scale="1 1 1"
+        position="0 -1 0"
+        material="transparent: true; opacity: 0.6;"
+      >
+      </a-entity>
+    </a-marker>
+    
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>
