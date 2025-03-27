@@ -19,7 +19,6 @@
             <li>{{ item }}</li>
         {% endfor %}
     </ul>
-    asfpoijas
 </body>
 </html>
 
