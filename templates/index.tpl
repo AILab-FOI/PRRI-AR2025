@@ -67,10 +67,17 @@
         <h1>ESCAPE</h1>
         <h2>RETROFUTURE</h2>
         <div class="menu">
-            <button class="start">🚀 START GAME</button>
+            <button id="start_button" class="start">🚀 START GAME</button>
             <button class="about">ℹ ABOUT</button>
         </div>
         <div class="mute">🔇</div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("start_button").addEventListener("click", function() {
+                window.location.href = "ar/ex/index.html";
+            });
+        });
+    </script>
 </body>
 </html>
