@@ -13,31 +13,15 @@
 		<img id="grid" src="images/border.png" />
 		<img id="earth-flat" src="images/earth-flat.jpg" />
 		<img id="earth-sphere" src="images/earth-sphere.jpg" />
+        <img id="buri" src="images/buri.png" />
 	</a-assets>
     
     <a-marker type="pattern" url="data/kanji.patt">
-        <a-box position="0 0.5 0" 
-               material="color: red; transparent: true; opacity: 0.50;">
-        </a-box>
-    </a-marker>
-    
-    <a-marker type="barcode" value="0">
-        <a-box position="0 0.5 0" 
-               material="src: #grid; color: yellow; transparent: true; opacity: 0.50;">
-        </a-box>
-    </a-marker>
-
-    <a-marker type="barcode" value="1">
-        <a-plane position="0 0 0" 
+        <a-plane position="0.44 0.2 -0.4" 
                  rotation="-90 0 0"
-               material="src: #earth-flat;">
+                 scale="4 4 4"
+               material="src: #buri;">
         </a-plane>
-    </a-marker>
-
-    <a-marker type="barcode" value="2">
-        <a-sphere position="0 0.5 0" 
-               material="src: #earth-sphere; transparent: true; opacity: 0.95;">
-        </a-sphere>
     </a-marker>
     
     <a-entity camera></a-entity>
