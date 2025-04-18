@@ -1,0 +1,28 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+
+
+    <a-assets>
+        <img id="ww2" src="models/ww2.png" />
+    </a-assets>
+
+    <a-marker type="pattern" url="data/kanji.patt">
+        <a-plane position="0 0 0" 
+                rotation="-90 0 0"
+                scale="1.6 1.6 1.6"
+            material="src: #ww2;">
+        </a-plane>
+    </a-marker>
+        
+        <a-entity camera=""></a-entity>
+    </a-scene>
+    
+</a-scene>
+</body>
+</html>

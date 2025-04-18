@@ -1,0 +1,89 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+
+<!-- set detectionMode and matrixCodeType to enable barcode marker detection and custom pattern files -->
+
+<!--
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+
+    <a-assets>
+		<img id="grid" src="images/border.png" />
+		<img id="earth-flat" src="images/earth-flat.jpg" />
+		<img id="earth-sphere" src="images/earth-sphere.jpg" />
+        <img id="buri" src="images/buri.png" />
+	</a-assets>
+    
+    <a-marker type="pattern" url="data/kanji.patt">
+        <a-plane position="0.44 0.2 -0.4" 
+                 rotation="-90 0 0"
+                 scale="4 4 4"
+               material="src: #buri;">
+        </a-plane>
+    </a-marker>
+
+    <a-scene embedded="" vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;" inspector="" 
+    keyboard-shortcuts="" screenshot="" device-orientation-permission-ui="">
+
+        <a-assets>
+            <a-asset-item id="tree" src="models/kipic/kipic.gltf"></a-asset-item>
+        </a-assets>
+        
+        <a-marker type="pattern" url="data/kanji.patt" material="" arjs-anchor="" arjs-hit-testing="">
+            <a-entity position="0 0 0" rotation="-180 0 180" scale="0.007 0.007 0.007" gltf-model="#tree">
+            </a-entity>
+        </a-marker>
+
+
+
+        <a-assets>
+        <img id="apple" src="models/apple.png" />
+	</a-assets>
+    
+    <a-marker type="pattern" url="data/kanji.patt">
+        <a-plane position="0 0 0" 
+                 rotation="-90 0 0"
+                 scale="2 2 2"
+               material="src: #apple;">
+        </a-plane>
+    </a-marker>
+
+    
+
+    <a-assets>
+        <img id="rome" src="models/rome.png" />
+	</a-assets>
+    
+    <a-marker type="pattern" url="data/kanji.patt">
+        <a-plane position="0 0 0" 
+                 rotation="-90 0 0"
+                 scale="2.8 2 2"
+               material="src: #rome;">
+        </a-plane>
+    </a-marker>
+-->
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+
+
+    <a-assets>
+        <img id="pyramid" src="models/pyramid.png" />
+	</a-assets>
+    
+    <a-marker type="pattern" url="data/letterB.patt">
+        <a-plane position="0 0 0" 
+                 rotation="-90 0 0"
+                 scale="2 2 2"
+               material="src: #pyramid;">
+        </a-plane>
+    </a-marker>
+        
+        <a-entity camera=""></a-entity>
+    </a-scene>
+    
+</a-scene>
+</body>
+</html>
