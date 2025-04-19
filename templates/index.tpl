@@ -63,20 +63,47 @@
     </style>
 </head>
 <body>
+    <audio id="bg-music" autoplay loop src="{{ url_for('static', filename='Menu.mp3') }}"></audio>
     <div class="container">
-        <h1>ESCAPE</h1>
+        <h1>ESCAPE O</h1>
         <h2>RETROFUTURE</h2>
         <div class="menu">
             <button id="start_button" class="start">🚀 START GAME</button>
             <button class="about">ℹ ABOUT</button>
         </div>
-        <div class="mute">🔇</div>
+        <div class="mute" id="mute-toggle">🔊</div>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("start_button").addEventListener("click", function() {
                 window.location.href = "ar/ex/index.html";
             });
+        });
+        
+        const music = document.getElementById('bg-music');
+        const muteButton = document.getElementById('mute-toggle');
+        let musicPlaying = true;
+
+        // Try to play music on load
+        window.addEventListener('DOMContentLoaded', () => {
+            music.volume = 1;
+            music.play().catch(() => {
+                console.log("Autoplay blocked until user interacts.");
+                musicPlaying = false;
+                muteButton.textContent = '🔇';
+            });
+        });
+
+        // Toggle mute/unmute
+        muteButton.addEventListener('click', () => {
+            if (!musicPlaying) {
+                music.play();
+                muteButton.textContent = '🔊';
+            } else {
+                music.pause();
+                muteButton.textContent = '🔇';
+            }
+            musicPlaying = !musicPlaying;
         });
     </script>
 </body>
