@@ -79,6 +79,9 @@
                 window.location.href = "ar/ex/index.html";
             });
         });
+        document.querySelector(".about").addEventListener("click", function() {
+    window.location.href = "about.tpl";
+    });
         
         const music = document.getElementById('bg-music');
         const muteButton = document.getElementById('mute-toggle');
