@@ -5,23 +5,22 @@
 <script src="js/aframe-ar.js"></script>
 <body style="margin: 0px; overflow: hidden;">
 
-<!-- set detectionMode and matrixCodeType to enable barcode marker detection and custom pattern files -->
-
-<a-scene embedded="" vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;" inspector="" 
+<a-scene embedded="" vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;" inspector=""
     keyboard-shortcuts="" screenshot="" device-orientation-permission-ui="">
 
-        <a-assets>
-            <a-asset-item id="tree" src="models/kipic/kipic.gltf"></a-asset-item>
-        </a-assets>
-        
-        <a-marker type="pattern" url="data/letterF.patt" material="" arjs-anchor="" arjs-hit-testing="">
-            <a-entity position="0 0 0" rotation="-180 0 180" scale="0.007 0.007 0.007" gltf-model="#tree">
-            </a-entity>
-        </a-marker>
-        
-        <a-entity camera=""></a-entity>
-    </a-scene>
-    
+    <a-assets>
+        <a-asset-item id="tree" src="models/kipic/kipic.gltf"></a-asset-item>
+    </a-assets>
+
+    <a-marker type="pattern" url="data/letterF.patt" material="" arjs-anchor="" arjs-hit-testing="">
+        <a-entity position="0 0 0" rotation="90 0 -90" scale="0.007 0.007 0.007" gltf-model="#tree"
+          animation="property: rotation; from: 90 0 -90; to: 90 360 -90; loop: true; dur: 5000; easing: linear;">
+        </a-entity>
+    </a-marker>
+
+    <a-entity camera=""></a-entity>
+</a-scene>
+
 </a-scene>
 </body>
 </html>
