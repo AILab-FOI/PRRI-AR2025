@@ -78,6 +78,9 @@
                 window.location.href = "ar/ex/index.html";
             });
         });
+        document.querySelector(".about").addEventListener("click", function() {
+    window.location.href = "about.tpl";
+    });
     </script>
 </body>
 </html>
