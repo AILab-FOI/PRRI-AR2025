@@ -10,6 +10,10 @@ app = Flask(__name__, template_folder="templates", static_folder="ar")
 def home():
     return render_template("index.tpl", message="Hello from Flask!")
 
+@app.route("/about")
+def about():
+    return render_template("about.tpl") 
+
 # Serve static files from the "ar" directory
 @app.route("/ar/")
 @app.route("/ar/<path:filename>")

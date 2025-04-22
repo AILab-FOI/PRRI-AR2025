@@ -91,7 +91,12 @@
         <h2>📌 Game Story</h2>
         <p>The year is unknown. The spaceship Insight was abandoned after an attack by the Ruxians, an alien race seeking to exploit time travel technology. Artifacts removed from history are beginning to destabilize the timeline. With the help of a surviving scientist, a team of players must return all the artifacts and save reality.</p>
 
-        <a href="index.tpl" class="back-button">Back to Main Menu</a>
+        <a class="back-button">Back to Main Menu</a>
     </div>
+    <script>
+        document.querySelector(".back-button").addEventListener("click", function() {
+            window.location.href = "/";
+        });
+    </script>
 </body>
 </html>

@@ -76,11 +76,11 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("start_button").addEventListener("click", function() {
-                window.location.href = "lobby.tpl";
+                window.location.href = "ar/ex/index.html";
             });
         });
         document.querySelector(".about").addEventListener("click", function() {
-    window.location.href = "/about";
+    window.location.href = "about.tpl";
     });
         
         const music = document.getElementById('bg-music');
