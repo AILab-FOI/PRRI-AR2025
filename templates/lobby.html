@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Lobby</title>
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+    <style>
+        body {
+            background-color: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        #players {
+            margin-top: 30px;
+        }
+        #start_button {
+            display: none;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            background: #3fcaff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lobby</h1>
+    <div id="players">Waiting for players...</div>
+    <button id="start_button">START GAME</button>
+
+    <script>
+        const socket = io();
+
+        socket.on('connect', function() {
+            socket.emit('join', {name: socket.id});
+        });
+
+
+        socket.on('players_update', function(players) {
+            document.getElementById('players').innerHTML = "Players in lobby: " + Object.keys(players).length;
+
+
+           
+            if (players[0] === socket.id) {
+                document.getElementById('start_button').style.display = 'block';
+            } else {
+                document.getElementById('start_button').style.display = 'none';
+            }
+        });
+
+        document.getElementById('start_button').addEventListener('click', function() {
+            socket.emit('start_game');
+        });
+
+        socket.on('game_started', function() {
+            window.location.href = "/game"; 
+        });
+    </script>
+</body>
+</html>
