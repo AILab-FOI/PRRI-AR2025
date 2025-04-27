@@ -23,7 +23,7 @@ def render_page(page="index"):
 def serve_static(filename="index.html"):
     file_path = os.path.join("ar", filename)
     if not os.path.isfile(file_path):
-        abort(404)  
+        abort(404)
 
     return send_from_directory("ar", filename)
 
