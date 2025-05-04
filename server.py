@@ -15,7 +15,7 @@ admin_sid = None
 def render_page(page="index"):
     try:
         return render_template(f"{page}.html")
-    except: 
+    except:  # noqa: E722
         abort(404) 
 
 
@@ -63,7 +63,8 @@ def handle_disconnect():
 @socketio.on("kick_player")
 def kick_player(sid_to_kick):
     if request.sid == admin_sid and sid_to_kick in players:
-        socke
+        players.pop(sid_to_kick, None)
+        socketio.emit("kicked", room=sid_to_kick)
 
 
 @socketio.on("start_game")
