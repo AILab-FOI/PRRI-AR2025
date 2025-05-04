@@ -7,6 +7,7 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 players = {}
+admin_sid = None
 
 
 @app.route("/")
@@ -14,8 +15,8 @@ players = {}
 def render_page(page="index"):
     try:
         return render_template(f"{page}.html")
-    except:  # noqa: E722
-        abort(404)  # if template not found
+    except: 
+        abort(404) 
 
 
 @app.route("/ar/")
@@ -30,21 +31,61 @@ def serve_static(filename="index.html"):
 
 @socketio.on("join")
 def handle_join(data):
+    global admin_sid
     player_name = data["name"]
     players[request.sid] = player_name
-    socketio.emit("players_update", players)
+
+    if admin_sid is None:
+        admin_sid = request.sid  
+
+    socketio.emit("players_update", {
+        "players": players,
+        "admin": admin_sid
+    })
 
 
 @socketio.on("disconnect")
 def handle_disconnect():
+    global admin_sid
     if request.sid in players:
         del players[request.sid]
-    socketio.emit("players_update", players)
+
+    if request.sid == admin_sid:
+        
+        admin_sid = next(iter(players), None)
+
+    socketio.emit("players_update", {
+        "players": players,
+        "admin": admin_sid
+    })
+
+
+@socketio.on("kick_player")
+def kick_player(sid_to_kick):
+    if request.sid == admin_sid and sid_to_kick in players:
+        socke
 
 
 @socketio.on("start_game")
 def start_game():
     socketio.emit("game_started")
+
+
+@socketio.on("kick_player")
+def handle_kick_player(data):
+    global admin_sid
+    if request.sid != admin_sid:
+        return  
+
+    player_id = data.get("id")
+    if player_id in players:
+        socketio.emit("kicked", room=player_id) 
+        del players[player_id]
+        socketio.emit("players_update", {
+            "players": players,
+            "admin": admin_sid
+        })
+
 
 
 if __name__ == "__main__":
