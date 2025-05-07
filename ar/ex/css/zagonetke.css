@@ -1,0 +1,89 @@
+/* reset i osnovno */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  header {
+    background: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+  }
+  main {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+  }
+  .image-container {
+    margin: 20px 0;
+  }
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+  }
+  .answer-container {
+    margin: 20px 0;
+  }
+  #answer-input {
+    width: 300px;
+    max-width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  #feedback {
+    color: #c00;
+    margin-top: 10px;
+  }
+  .hidden {
+    display: none;
+  }
+  footer {
+    padding: 20px;
+    text-align: center;
+  }
+  #submit-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  /* mobilna prilagodba */
+  @media (max-width: 600px) {
+    header {
+      padding: 15px;
+    }
+    #answer-input {
+      width: 100%;
+    }
+  }
+  .levels-list {
+    list-style: none;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 0;
+  }
+  .levels-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .level-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .level-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  .status {
+    margin-left: 10px;
+    font-weight: bold;
+  }
