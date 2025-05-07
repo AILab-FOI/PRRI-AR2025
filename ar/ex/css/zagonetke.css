@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #0e0e0e;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #00c3ff, #ff42d6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+main {
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #ff42d6;
+  margin-top: 20px;
+}
+
+.answer-container {
+  margin: 30px 0 10px;
+}
+
+#answer-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  color: #fff;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+#answer-input::placeholder {
+  color: #888;
+}
+
+#feedback {
+  color: #ff4081;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  margin-top: 20px;
+}
+
+#submit-button {
+  background-color: #00c3ff;
+  color: #000;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 10px #00c3ff, 0 0 20px #ff42d6;
+}
+
+#submit-button:hover {
+  background: linear-gradient(90deg, #00c3ff, #ff42d6);
+  color: #fff;
+}
+
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  #answer-input {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  #submit-button {
+    padding: 10px 20px;
+  }
+}
+
+.levels-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+.levels-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f1f1f;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #333;
+}
+
+.level-button {
+  background: linear-gradient(90deg, #00c3ff, #ff42d6);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.level-button:disabled {
+  background: #444;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.status {
+  font-weight: bold;
+  color: #00c3ff;
+}
