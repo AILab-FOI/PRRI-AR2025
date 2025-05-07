@@ -1,64 +1,133 @@
 <!DOCTYPE html>
 <html lang="hr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Lobby</title>
-    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
-    <style>
-      body {
-        background-color: #111;
-        color: white;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding-top: 50px;
-      }
-      #players {
-        margin-top: 30px;
-      }
-      #start_button {
-        display: none;
-        margin-top: 30px;
-        padding: 10px 20px;
-        font-size: 1.5rem;
-        background: #3fcaff;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Lobby</title>
+  <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    #players {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    #start_button {
+      display: none;
+      margin-top: 30px;
+      padding: 12px 25px;
+      font-size: 1.2rem;
+      background: #3fcaff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+   
+    li button {
+      margin-left: 10px;
+      padding: 3px 8px;
+      border: none;
+      background: #ff0055;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    li button:hover {
+      background: #cc0044;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
     <h1>Lobby</h1>
-    <div id="players">Waiting for players...</div>
+    <div id="players">Čekam igrače...</div>
     <button id="start_button">START GAME</button>
+  </div>
 
-    <script>
-      const socket = io();
+  <script>
+    const socket = io();
+    
+    socket.on("connect", function () {
+      const name = localStorage.getItem("playerName") || "Nepoznati igrač";
+      socket.emit("join", { name });
+    });
 
-      socket.on("connect", function () {
-        socket.emit("join", { name: socket.id });
-      });
+    socket.on("players_update", function (data) {
+  const { players, admin } = data;
+  const playerEntries = Object.entries(players);
 
-      socket.on("players_update", function (players) {
-        document.getElementById("players").innerHTML =
-          "Players in lobby: " + Object.keys(players).length;
+  const isAdmin = socket.id === admin;
 
-        if (players[0] === socket.id) {
-          document.getElementById("start_button").style.display = "block";
-        } else {
-          document.getElementById("start_button").style.display = "none";
-        }
-      });
+  const playerList = playerEntries.map(([id, name]) => {
+    const isPlayerAdmin = id === admin;
+    let displayName = name;
+    if (isPlayerAdmin) displayName += " 👑";
 
-      document
-        .getElementById("start_button")
-        .addEventListener("click", function () {
-          socket.emit("start_game");
-        });
+    const kickButton = (isAdmin && id !== socket.id)
+      ? `<button onclick="kickPlayer('${id}')">Kick</button>`
+      : "";
 
-      socket.on("game_started", function () {
-        window.location.href = "/game";
-      });
-    </script>
-  </body>
+    return `<li>${displayName} ${kickButton}</li>`;
+  }).join("");
+
+  document.getElementById("players").innerHTML = `
+    <h2>Igrači u lobbyju (${playerEntries.length})</h2>
+    <ul>${playerList}</ul>
+  `;
+
+  document.getElementById("start_button").style.display = isAdmin ? "inline-block" : "none";
+});
+
+
+    document.getElementById("start_button").addEventListener("click", function () {
+      socket.emit("start_game");
+    });
+
+    socket.on("game_started", function () {
+      window.location.href = "/game";
+    });
+    
+
+  function kickPlayer(playerId) {
+    socket.emit("kick_player", { id: playerId });
+  }
+
+  socket.on("kicked", function () {
+    alert("Izbačen si iz lobbyja od strane admina.");
+    window.location.href = "/";
+  });
+
+</script>
+</body>
 </html>
