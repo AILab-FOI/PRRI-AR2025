@@ -8,7 +8,8 @@
     body {
       margin: 0;
       height: 100vh;
-      background-color: #111;
+      background: url('ar/images/backgroundforar.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: white;
       font-family: Arial, sans-serif;
       display: flex;
@@ -69,17 +70,44 @@
   </style>
 </head>
 <body>
+  <audio id="bg-music" autoplay loop src="ar/music/Lobby.mp3"></audio>
   <div class="container">
     <h1>Lobby</h1>
-    <div id="players">Čekam igrače...</div>
+    <div id="players">Waiting for players...</div>
     <button id="start_button">START GAME</button>
   </div>
-
+</div>
+<div class="mute" id="mute-toggle">🔊</div>
+</div>
   <script>
+    const music = document.getElementById("bg-music");
+      const muteButton = document.getElementById("mute-toggle");
+      let musicPlaying = true;
+
+      window.addEventListener("DOMContentLoaded", () => {
+        music.volume = 1;
+        music.play().catch(() => {
+          console.log("Autoplay blocked until user interacts.");
+          musicPlaying = false;
+          muteButton.textContent = "🔇";
+        });
+      });
+
+      muteButton.addEventListener("click", () => {
+        if (!musicPlaying) {
+          music.play();
+          muteButton.textContent = "🔊";
+        } else {
+          music.pause();
+          muteButton.textContent = "🔇";
+        }
+        musicPlaying = !musicPlaying;
+      });
+
     const socket = io();
     
     socket.on("connect", function () {
-      const name = localStorage.getItem("playerName") || "Nepoznati igrač";
+      const name = localStorage.getItem("playerName") || "Unknown player";
       socket.emit("join", { name });
     });
 
@@ -102,7 +130,7 @@
   }).join("");
 
   document.getElementById("players").innerHTML = `
-    <h2>Igrači u lobbyju (${playerEntries.length})</h2>
+    <h2>Players in lobby (${playerEntries.length})</h2>
     <ul>${playerList}</ul>
   `;
 

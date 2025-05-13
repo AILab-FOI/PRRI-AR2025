@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="opis" content="Pocetni izbornik" />
-    <meta name="keywords" content="pocetna stranica, postavke , tutorijal" />
-    <title>Escape Retrofuture</title>
+    <meta name="opis" content="Lose page" />
+    <meta name="keywords" content="game over, lose page , fail condition" />
+    <title>You've lost</title>
     <style>
       body {
         font-family: Arial, sans-serif;
-        background: url('ar/images/backgroundforar.jpg') no-repeat center center fixed;
+        background: url('../images/backgroundlose.jpg') no-repeat center center fixed;
         background-size: cover;
         color: white;
         text-align: center;
@@ -102,14 +102,12 @@
     </style>
   </head>
   <body>
-    <audio id="bg-music" autoplay loop src="ar/music/Menu.mp3"></audio>
+    <audio id="bg-music" autoplay src="../music/Lose.mp3"></audio>
     <div class="container">
-      <h1>TIMELINE OF INSIGHT</h1>
-      <h2>ESCAPE ROOM EXPERIENCE</h2>
+      <h1>YOU'VE LOST</h1>
+      <h2>The timeline has been destroyed beyond repair...</h2>
      <div class="menu">
-      <input type="text" id="player_name" placeholder="Enter your name:" required />
-      <button id="start_button" class="start">🚀 START GAME</button>
-      <button class="about">ℹ ABOUT</button>
+      <button id="start_button" class="start">Return to Start Page</button>
     </div>
       
       <div class="mute" id="mute-toggle">🔊</div>
@@ -117,18 +115,9 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("start_button").addEventListener("click", function () {
-        const name = document.getElementById("player_name").value.trim();
-        if (!name) {
-          alert("Please enter your name.");
-          return;
-        }
-        localStorage.setItem("playerName", name);
-        window.location.href = "/lobby";
+        window.location.href = "/index";
       });
 
-      });
-      document.querySelector(".about").addEventListener("click", function () {
-        window.location.href = "/about";
       });
 
       const music = document.getElementById("bg-music");
