@@ -71,7 +71,7 @@ const riddles = [
         sessionStorage.setItem('completedLevels', JSON.stringify(completed));
   
         // vrati se na stranicu levela
-        window.location.href = 'levels.html';
+        window.location.href = '/levels';
   
       } else {
         document.getElementById("feedback").classList.remove("hidden");

@@ -116,6 +116,8 @@
     </div>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        localStorage.clear();
+        sessionStorage.clear();
         document.getElementById("start_button").addEventListener("click", function () {
         const name = document.getElementById("player_name").value.trim();
         if (!name) {

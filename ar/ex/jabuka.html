@@ -1,29 +1,48 @@
-<!doctype HTML>
+<!DOCTYPE html>
 <html>
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<script src="js/aframe.min.js"></script>
-<script src="js/aframe-ar.js"></script>
-<body style="margin: 0px; overflow: hidden;">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <script src="js/aframe.min.js"></script>
+  <script src="js/aframe-ar.js"></script>
+  <body style="margin: 0px; overflow: hidden">
+    <!-- set detectionMode and matrixCodeType to enable barcode marker detection and custom pattern files -->
 
-<!-- set detectionMode and matrixCodeType to enable barcode marker detection and custom pattern files -->
-
-<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
-
-    <a-assets>
+    <a-scene
+      embedded
+      vr-mode-ui="enabled: false;"
+      arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+    >
+      <a-assets>
         <img id="apple" src="models/apple.png" />
-    </a-assets>
+      </a-assets>
 
-    <a-marker type="pattern" url="data/letterA.patt">
-        <a-plane position="0 0 0" 
-                rotation="-90 0 0"
-                scale="2 2 2"
-            material="src: #apple;">
+      <a-marker id="markerAMarker" type="pattern" url="data/letterA.patt">
+        <a-plane
+          position="0 0 0"
+          rotation="-90 0 0"
+          scale="2 2 2"
+          material="src: #apple;"
+        >
         </a-plane>
-    </a-marker>
-    
-    <a-entity camera></a-entity>
-    
-</a-scene>
+      </a-marker>
 
-</body>
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+      window.addEventListener("load", () => {
+        const marker = document.querySelector("#markerAMarker");
+        let redirected = false;
+
+        marker.addEventListener("markerFound", () => {
+          setTimeout(() => {
+            console.log("Pronaden marker");
+            if (!redirected) {
+              redirected = true;
+              window.location.href = "/zagonetke";
+            }
+          }, 1000);
+        });
+      });
+    </script>
+  </body>
 </html>
