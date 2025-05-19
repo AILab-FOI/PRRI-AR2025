@@ -16,7 +16,7 @@
         <a-asset-item id="tree" src="models/kipic/kipic.gltf"></a-asset-item>
     </a-assets>
 
-    <a-marker type="pattern" url="data/letterF.patt" material="" arjs-anchor="" arjs-hit-testing="">
+    <a-marker id="markerFMarker" type="pattern" url="data/letterF.patt" material="" arjs-anchor="" arjs-hit-testing="">
         <a-entity position="0 0 0" rotation="90 0 -90" scale="0.007 0.007 0.007" gltf-model="#tree"
           animation="property: rotation; from: 90 0 -90; to: 90 360 -90; loop: true; dur: 5000; easing: linear;">
         </a-entity>
@@ -26,5 +26,21 @@
 </a-scene>
 
 </a-scene>
+<script>
+    window.addEventListener("load", () => {
+      const marker = document.querySelector("#markerFMarker");
+      let redirected = false;
+
+      marker.addEventListener("markerFound", () => {
+        setTimeout(() => {
+          console.log("Pronaden marker");
+          if (!redirected) {
+            redirected = true;
+            window.location.href = "/zagonetke?level=5";
+          }
+        }, 1000);
+      });
+    });
+  </script>
 </body>
 </html>

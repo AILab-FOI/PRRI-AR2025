@@ -77,7 +77,7 @@
         <img id="pyramid" src="models/pyramid.png" />
 	</a-assets>
     
-    <a-marker type="pattern" url="data/letterB.patt">
+    <a-marker id="markerBMarker" type="pattern" url="data/letterB.patt">
         <a-plane position="0 0 0" 
                  rotation="-90 0 0"
                  scale="2 2 2"
@@ -89,5 +89,21 @@
     </a-scene>
     
 </a-scene>
+<script>
+    window.addEventListener("load", () => {
+      const marker = document.querySelector("#markerBMarker");
+      let redirected = false;
+
+      marker.addEventListener("markerFound", () => {
+        setTimeout(() => {
+          console.log("Pronaden marker");
+          if (!redirected) {
+            redirected = true;
+            window.location.href = "/zagonetke?level=2";
+          }
+        }, 1000);
+      });
+    });
+  </script>
 </body>
 </html>

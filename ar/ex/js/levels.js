@@ -1,5 +1,6 @@
 // Ukupno 6 levela
 const totalLevels = 6;
+let number_of_completed_levels = 0;
 
 // Dohvati ili inicijaliziraj statuse dovršenih levela
 let completed = JSON.parse(sessionStorage.getItem('completedLevels') || '[]');
@@ -34,6 +35,7 @@ for (let i = 1; i <= totalLevels; i++) {
     span.textContent = 'Completed';
     span.classList.add('status');
     li.appendChild(span);
+    number_of_completed_levels++;
 
   } else if (i > 1 && !completed[i - 2]) {
     btn.disabled = true;
@@ -52,4 +54,8 @@ for (let i = 1; i <= totalLevels; i++) {
   }
 
   listEl.appendChild(li);
+
 }
+
+
+console.log("Broj rjesenih nivoa: ", number_of_completed_levels);

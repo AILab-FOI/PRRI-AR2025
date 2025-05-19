@@ -16,7 +16,7 @@
         <img id="ww2" src="models/ww2.png" />
     </a-assets>
 
-    <a-marker type="pattern" url="data/kanji.patt">
+    <a-marker id="markerKanjiMarker" type="pattern" url="data/kanji.patt">
         <a-plane position="0 0 0" 
                 rotation="-90 0 0"
                 scale="1.6 1.6 1.6"
@@ -28,5 +28,22 @@
     </a-scene>
     
 </a-scene>
+
+<script>
+    window.addEventListener("load", () => {
+      const marker = document.querySelector("#markerKanjiMarker");
+      let redirected = false;
+
+      marker.addEventListener("markerFound", () => {
+        setTimeout(() => {
+          console.log("Pronaden marker");
+          if (!redirected) {
+            redirected = true;
+            window.location.href = "/zagonetke?level=6";
+          }
+        }, 1000);
+      });
+    });
+  </script>
 </body>
 </html>

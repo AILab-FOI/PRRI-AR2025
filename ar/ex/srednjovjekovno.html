@@ -17,7 +17,7 @@
         <a-asset-item id="cross" src="models/medieval/medieval.gltf"></a-asset-item>
     </a-assets>
 
-    <a-marker type="pattern" url="data/letterD.patt" material="" arjs-anchor="" arjs-hit-testing="">
+    <a-marker id="markerDMarker" type="pattern" url="data/letterD.patt" material="" arjs-anchor="" arjs-hit-testing="">
         <a-entity position="0 0 0" rotation="-90 0 0" scale="0.18 0.18 0.18" gltf-model="#cross">
         </a-entity>
     </a-marker>
@@ -26,5 +26,21 @@
 </a-scene>
 
 </a-scene>
+<script>
+    window.addEventListener("load", () => {
+      const marker = document.querySelector("#markerDMarker");
+      let redirected = false;
+
+      marker.addEventListener("markerFound", () => {
+        setTimeout(() => {
+          console.log("Pronaden marker");
+          if (!redirected) {
+            redirected = true;
+            window.location.href = "/zagonetke?level=4";
+          }
+        }, 1000);
+      });
+    });
+  </script>
 </body>
 </html>
