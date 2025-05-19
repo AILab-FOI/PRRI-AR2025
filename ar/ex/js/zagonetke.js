@@ -53,28 +53,27 @@ const riddles = [
     document.getElementById("feedback").classList.add("hidden");
   }
   
-  document.addEventListener("DOMContentLoaded", () => {
-    let currentLevel = getLevel();
-    loadRiddle(currentLevel);
-  
-    document.getElementById("submit-button").addEventListener("click", () => {
-      const userAnswer = document.getElementById("answer-input").value.trim().toLowerCase();
-      const correctAnswer = riddles[currentLevel - 1].answer.toLowerCase();
-  
-      if (userAnswer === correctAnswer) {
-        // označi level kao riješen u sessionStorage
-        let completed = JSON.parse(sessionStorage.getItem('completedLevels') || '[]');
-        if (completed.length !== riddles.length) {
-          completed = Array(riddles.length).fill(false);
-        }
-        completed[currentLevel - 1] = true;
-        sessionStorage.setItem('completedLevels', JSON.stringify(completed));
-  
-        // vrati se na stranicu levela
-        window.location.href = '/levels';
-  
-      } else {
-        document.getElementById("feedback").classList.remove("hidden");
+document.addEventListener("DOMContentLoaded", () => {
+  let currentLevel = getLevel();
+  loadRiddle(currentLevel);
+
+  document.getElementById("submit-button").addEventListener("click", () => {
+    const userAnswer = document.getElementById("answer-input").value.trim().toLowerCase();
+    const correctAnswer = riddles[currentLevel - 1].answer.toLowerCase();
+
+    if (userAnswer === correctAnswer) {
+      let completed = JSON.parse(sessionStorage.getItem('completedLevels') || '[]');
+      if (completed.length !== riddles.length) {
+        completed = Array(riddles.length).fill(false);
       }
-    });
+      completed[currentLevel - 1] = true;
+      sessionStorage.setItem('completedLevels', JSON.stringify(completed));
+      window.location.href = '/levels';
+    } else {
+      document.getElementById("feedback").classList.remove("hidden");
+
+      // 👇 POZIV FUNKCIJE KOJA ODUZIMA 30 SEKUNDI I TRESE TIMER
+      penalizeTime(30);
+    }
   });
+});

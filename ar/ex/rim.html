@@ -3,10 +3,11 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <script src="js/aframe.min.js"></script>
 <script src="js/aframe-ar.js"></script>
- <script src="/ar/ex/js/timer.js"></script>
+ <script src="js/timer.js"></script>
  <link rel="stylesheet" href="/ar/ex/css/styles.css">
+ <div id="penalty-message" class="hidden" style="color: red; font-weight: bold; margin-top: 10px;"></div>
 <body style="margin: 0px; overflow: hidden;">
-<div id="timer" class="futuristic-timer">30:00</div>
+<div id="timer" class="futuristic-timer">:</div>
 <!-- set detectionMode and matrixCodeType to enable barcode marker detection and custom pattern files -->
 
 <a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">

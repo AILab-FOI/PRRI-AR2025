@@ -4,10 +4,11 @@
 <script src="js/aframe.min.js"></script>
 <script src="js/aframe-ar.js"></script>
 <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
-<script src="/ar/ex/js/timer.js"></script>
+<script src="js/timer.js"></script>
 <link rel="stylesheet" href="/ar/ex/css/styles.css">
 <body style="margin: 0px; overflow: hidden;">
-<div id="timer" class="futuristic-timer">30:00</div>
+<div id="timer" class="futuristic-timer">:</div>
+<div id="penalty-message" class="hidden" style="color: red; font-weight: bold; margin-top: 10px;"></div>
 
 <a-scene embedded="" vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;" inspector=""
     keyboard-shortcuts="" screenshot="" device-orientation-permission-ui="">

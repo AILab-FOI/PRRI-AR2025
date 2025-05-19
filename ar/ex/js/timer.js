@@ -1,12 +1,12 @@
 function startTimer() {
-    let endTime = localStorage.getItem("timerEndTime");
-    if (!endTime) {
+    if (!localStorage.getItem("timerEndTime")) {
         const now = new Date().getTime();
-        endTime = now + 30 * 60 * 1000; 
+        const endTime = now + 30 * 60 * 1000; 
         localStorage.setItem("timerEndTime", endTime);
     }
 
     const timerInterval = setInterval(() => {
+        const endTime = parseInt(localStorage.getItem("timerEndTime"));
         const now = new Date().getTime();
         const timeLeft = Math.floor((endTime - now) / 1000); 
 
@@ -28,6 +28,38 @@ function updateTimerDisplay(timeLeft) {
     if (timerElement) {
         timerElement.textContent = timerDisplay;
     }
+}
+
+function penalizeTime(secondsToSubtract) {
+    let endTime = parseInt(localStorage.getItem("timerEndTime"));
+    if (endTime) {
+        endTime -= secondsToSubtract * 1000;
+        localStorage.setItem("timerEndTime", endTime);
+    }
+
+    const penaltyMsg = document.getElementById("penalty-message");
+    if (penaltyMsg) {
+        penaltyMsg.textContent = `Kazna: -${secondsToSubtract} sekundi!`;
+        penaltyMsg.classList.remove("hidden");
+        penaltyMsg.classList.add("show");
+        setTimeout(() => {
+            penaltyMsg.classList.remove("show");
+            penaltyMsg.classList.add("hidden");
+        }, 2000);
+    }
+
+    const timerEl = document.getElementById("timer");
+    if (timerEl) {
+        timerEl.classList.add("shake");
+        setTimeout(() => {
+            timerEl.classList.remove("shake");
+        }, 500);
+    }
+
+    const updatedEndTime = parseInt(localStorage.getItem("timerEndTime"));
+    const now = new Date().getTime();
+    const timeLeft = Math.floor((updatedEndTime - now) / 1000);
+    updateTimerDisplay(timeLeft);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
