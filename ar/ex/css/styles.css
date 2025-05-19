@@ -1,0 +1,22 @@
+.futuristic-timer {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-family: 'Orbitron', sans-serif; 
+    font-size: 24px;
+    color: #00ffcc; 
+    background: rgba(0, 0, 0, 0.7); 
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #ff00ff; 
+    z-index: 1000; 
+    text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc; 
+    animation: pulse 2s infinite alternate; 
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
