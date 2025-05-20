@@ -3,8 +3,11 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <script src="js/aframe.min.js"></script>
 <script src="js/aframe-ar.js"></script>
+ <script src="js/timer.js"></script>
+ <link rel="stylesheet" href="/ar/ex/css/styles.css">
+ <div id="penalty-message" class="hidden" style="color: red; font-weight: bold; margin-top: 10px;"></div>
 <body style="margin: 0px; overflow: hidden;">
-
+<div id="timer" class="futuristic-timer">:</div>
 <!-- set detectionMode and matrixCodeType to enable barcode marker detection and custom pattern files -->
 
 <a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
@@ -13,7 +16,7 @@
         <img id="rome" src="models/rome.png" />
 	</a-assets>
     
-    <a-marker type="pattern" url="data/letterC.patt">
+    <a-marker id="markerCMarker" type="pattern" url="data/letterC.patt">
         <a-plane position="0 0 0" 
                  rotation="-90 0 0"
                  scale="2.8 2 2"
@@ -25,5 +28,21 @@
     </a-scene>
     
 </a-scene>
+<script>
+    window.addEventListener("load", () => {
+      const marker = document.querySelector("#markerCMarker");
+      let redirected = false;
+
+      marker.addEventListener("markerFound", () => {
+        setTimeout(() => {
+          console.log("Pronaden marker");
+          if (!redirected) {
+            redirected = true;
+            window.location.href = "/zagonetke?level=3";
+          }
+        }, 1000);
+      });
+    });
+  </script>
 </body>
 </html>

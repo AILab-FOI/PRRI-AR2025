@@ -3,7 +3,11 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <script src="js/aframe.min.js"></script>
 <script src="js/aframe-ar.js"></script>
+<script src="js/timer.js"></script>
+<link rel="stylesheet" href="/ar/ex/css/styles.css">
 <body style="margin: 0px; overflow: hidden;">
+<div id="timer" class="futuristic-timer">:</div>
+<div id="penalty-message" class="hidden" style="color: red; font-weight: bold; margin-top: 10px;"></div>
 
 <a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
 
@@ -12,7 +16,7 @@
         <img id="ww2" src="models/ww2.png" />
     </a-assets>
 
-    <a-marker type="pattern" url="data/kanji.patt">
+    <a-marker id="markerKanjiMarker" type="pattern" url="data/kanji.patt">
         <a-plane position="0 0 0" 
                 rotation="-90 0 0"
                 scale="1.6 1.6 1.6"
@@ -24,5 +28,22 @@
     </a-scene>
     
 </a-scene>
+
+<script>
+    window.addEventListener("load", () => {
+      const marker = document.querySelector("#markerKanjiMarker");
+      let redirected = false;
+
+      marker.addEventListener("markerFound", () => {
+        setTimeout(() => {
+          console.log("Pronaden marker");
+          if (!redirected) {
+            redirected = true;
+            window.location.href = "/zagonetke?level=6";
+          }
+        }, 1000);
+      });
+    });
+  </script>
 </body>
 </html>

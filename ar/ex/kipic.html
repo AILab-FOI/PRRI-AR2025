@@ -3,7 +3,11 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <script src="js/aframe.min.js"></script>
 <script src="js/aframe-ar.js"></script>
+<script src="js/timer.js"></script>
+<link rel="stylesheet" href="/ar/ex/css/styles.css">
 <body style="margin: 0px; overflow: hidden;">
+<div id="timer" class="futuristic-timer">:</div>
+<div id="penalty-message" class="hidden" style="color: red; font-weight: bold; margin-top: 10px;"></div>
 
 <a-scene embedded="" vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;" inspector=""
     keyboard-shortcuts="" screenshot="" device-orientation-permission-ui="">
@@ -12,7 +16,7 @@
         <a-asset-item id="tree" src="models/kipic/kipic.gltf"></a-asset-item>
     </a-assets>
 
-    <a-marker type="pattern" url="data/letterF.patt" material="" arjs-anchor="" arjs-hit-testing="">
+    <a-marker id="markerFMarker" type="pattern" url="data/letterF.patt" material="" arjs-anchor="" arjs-hit-testing="">
         <a-entity position="0 0 0" rotation="90 0 -90" scale="0.007 0.007 0.007" gltf-model="#tree"
           animation="property: rotation; from: 90 0 -90; to: 90 360 -90; loop: true; dur: 5000; easing: linear;">
         </a-entity>
@@ -22,5 +26,21 @@
 </a-scene>
 
 </a-scene>
+<script>
+    window.addEventListener("load", () => {
+      const marker = document.querySelector("#markerFMarker");
+      let redirected = false;
+
+      marker.addEventListener("markerFound", () => {
+        setTimeout(() => {
+          console.log("Pronaden marker");
+          if (!redirected) {
+            redirected = true;
+            window.location.href = "/zagonetke?level=5";
+          }
+        }, 1000);
+      });
+    });
+  </script>
 </body>
 </html>
