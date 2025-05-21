@@ -20,6 +20,11 @@ def render_page(page="index"):
         abort(404)
 
 
+@socketio.on("time_up")
+def handle_time_up():
+    socketio.emit("time_up_all")
+
+
 @app.route("/ar/")
 @app.route("/ar/<path:filename>")
 def serve_static(filename="index.html"):
@@ -86,6 +91,11 @@ def handle_kick_player(data):
         socketio.emit("kicked", room=player_id)
         del players[player_id]
         socketio.emit("players_update", {"players": players, "admin": admin_sid})
+
+
+@socketio.on("victory")
+def handle_victory():
+    socketio.emit("victory_achieved")
 
 
 if __name__ == "__main__":

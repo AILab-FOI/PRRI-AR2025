@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="hr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leveli</title>
-  <link rel="stylesheet" href="../ar/ex/css/zagonetke.css">
-  <script src="/ar/ex/js/timer.js"></script>
-  <link rel="stylesheet" href="/ar/ex/css/styles.css">
-</head>
-<body>
-  <header>
-    <h1>Leveli</h1>
-    <div id="timer" class="futuristic-timer">:</div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leveli</title>
+    <link rel="stylesheet" href="../ar/ex/css/zagonetke.css" />
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+    <script src="/ar/ex/js/timer.js"></script>
+    <link rel="stylesheet" href="/ar/ex/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Leveli</h1>
+      <div id="timer" class="futuristic-timer">:</div>
+    </header>
 
-  <main>
-    <ul class="levels-list">
-      <!-- JS će dinamički ubaciti 5 levela -->
-    </ul>
-  </main>
+    <main>
+      <ul class="levels-list">
+        <!-- JS će dinamički ubaciti 5 levela -->
+      </ul>
+    </main>
 
-  <script src="../ar/ex/js/levels.js"></script>
-</body>
+    <script src="../ar/ex/js/levels.js"></script>
+    <script src="../ar/ex/js/gameover.js"></script>
+  </body>
 </html>

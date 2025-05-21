@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="hr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zagonetka</title>
-  <link rel="stylesheet" href="../ar/ex/css/zagonetke.css">
-  <link rel="stylesheet" href="/ar/ex/css/styles.css">
-</head>
-<body>
-  <header>
-    <h1 id="riddle-number">Riddle 1</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+    <script src="/ar/ex/"></script>
+    <title>Zagonetka</title>
+    <link rel="stylesheet" href="../ar/ex/css/zagonetke.css" />
+    <link rel="stylesheet" href="/ar/ex/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1 id="riddle-number">Riddle 1</h1>
       <div id="timer" class="futuristic-timer">:</div>
-  </header>
+    </header>
 
-  <main>
-    <p id="riddle-description">Ovdje ide opis zagonetke…</p>
-    <div class="image-container">
-      <img id="riddle-image" src="images/riddle1.jpg" alt="Slika zagonetke">
-    </div>
-    <div class="answer-container">
-      <input type="text" id="answer-input" placeholder="Upišite rješenje">
-    </div>
-    <p id="feedback" class="hidden">Wrong answer, try again.</p>
-  </main>
+    <main>
+      <p id="riddle-description">Ovdje ide opis zagonetke…</p>
+      <div class="image-container">
+        <img id="riddle-image" src="images/riddle1.jpg" alt="Slika zagonetke" />
+      </div>
+      <div class="answer-container">
+        <input type="text" id="answer-input" placeholder="Upišite rješenje" />
+      </div>
+      <p id="feedback" class="hidden">Wrong answer, try again.</p>
+    </main>
 
-  <footer>
-    <button id="submit-button">Submit</button>
-  </footer>
+    <footer>
+      <button id="submit-button">Submit</button>
+    </footer>
 
-  <script src="../ar/ex/js/zagonetke.js"></script>
-  <script src="../ar/ex/js/timer.js"></script>
-</body>
+    <script src="../ar/ex/js/zagonetke.js"></script>
+    <script src="../ar/ex/js/timer.js"></script>
+  </body>
 </html>
