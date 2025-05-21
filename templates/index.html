@@ -9,7 +9,8 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        background: url('ar/images/backgroundforar.jpg') no-repeat center center fixed;
+        background: url("ar/images/backgroundforar.jpg") no-repeat center center
+          fixed;
         background-size: cover;
         color: white;
         text-align: center;
@@ -61,9 +62,8 @@
         background-color: #333;
         color: white;
         outline: none;
-        box-sizing: border-box; 
+        box-sizing: border-box;
       }
-
 
       .menu input[type="text"]:focus {
         background-color: #444;
@@ -106,55 +106,90 @@
     <div class="container">
       <h1>TIMELINE OF INSIGHT</h1>
       <h2>ESCAPE ROOM EXPERIENCE</h2>
-     <div class="menu">
-      <input type="text" id="player_name" placeholder="Enter your name:" required />
-      <button id="start_button" class="start">🚀 START GAME</button>
-      <button class="about">ℹ ABOUT</button>
-    </div>
-      
+      <div class="menu">
+        <input
+          type="text"
+          id="player_name"
+          placeholder="Enter your name:"
+          required
+        />
+        <button id="start_button" class="start">🚀 START GAME</button>
+        <button class="about">ℹ ABOUT</button>
+      </div>
+
       <div class="mute" id="mute-toggle">🔊</div>
     </div>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         localStorage.clear();
         sessionStorage.clear();
-        document.getElementById("start_button").addEventListener("click", function () {
-        const name = document.getElementById("player_name").value.trim();
-        if (!name) {
-          alert("Please enter your name.");
-          return;
+
+        const startButton = document.getElementById("start_button");
+        const nameInput = document.getElementById("player_name");
+
+        async function checkGameStatus() {
+          try {
+            const response = await fetch("/game-status");
+            const data = await response.json();
+            if (data.game_started) {
+              startButton.disabled = true;
+              nameInput.disabled = true;
+              startButton.textContent = "🚫 GAME IN PROGRESS";
+              startButton.style.backgroundColor = "#999";
+              startButton.style.cursor = "not-allowed";
+            }
+          } catch (err) {
+            console.error("Failed to fetch game status", err);
+          }
         }
-        localStorage.setItem("playerName", name);
-        window.location.href = "/lobby";
-      });
 
-      });
-      document.querySelector(".about").addEventListener("click", function () {
-        window.location.href = "/about";
-      });
+        checkGameStatus();
 
-      const music = document.getElementById("bg-music");
-      const muteButton = document.getElementById("mute-toggle");
-      let musicPlaying = true;
+        startButton.addEventListener("click", async function () {
+          const name = nameInput.value.trim();
+          if (!name) {
+            alert("Please enter your name.");
+            return;
+          }
 
-      window.addEventListener("DOMContentLoaded", () => {
-        music.volume = 1;
-        music.play().catch(() => {
-          console.log("Autoplay blocked until user interacts.");
-          musicPlaying = false;
-          muteButton.textContent = "🔇";
+          const response = await fetch("/game-status");
+          const data = await response.json();
+          if (data.game_started) {
+            alert("Game already started. You can't join right now.");
+            return;
+          }
+
+          localStorage.setItem("playerName", name);
+          window.location.href = "/lobby";
         });
-      });
 
-      muteButton.addEventListener("click", () => {
-        if (!musicPlaying) {
-          music.play();
-          muteButton.textContent = "🔊";
-        } else {
-          music.pause();
-          muteButton.textContent = "🔇";
-        }
-        musicPlaying = !musicPlaying;
+        document.querySelector(".about").addEventListener("click", function () {
+          window.location.href = "/about";
+        });
+
+        const music = document.getElementById("bg-music");
+        const muteButton = document.getElementById("mute-toggle");
+        let musicPlaying = true;
+
+        window.addEventListener("DOMContentLoaded", () => {
+          music.volume = 1;
+          music.play().catch(() => {
+            console.log("Autoplay blocked until user interacts.");
+            musicPlaying = false;
+            muteButton.textContent = "🔇";
+          });
+        });
+
+        muteButton.addEventListener("click", () => {
+          if (!musicPlaying) {
+            music.play();
+            muteButton.textContent = "🔊";
+          } else {
+            music.pause();
+            muteButton.textContent = "🔇";
+          }
+          musicPlaying = !musicPlaying;
+        });
       });
     </script>
   </body>

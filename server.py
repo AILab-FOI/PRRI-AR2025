@@ -8,6 +8,7 @@ socketio = SocketIO(app)
 
 players = {}
 admin_sid = None
+game_started = False
 
 
 @app.route("/")
@@ -16,7 +17,7 @@ def render_page(page="index"):
     try:
         return render_template(f"{page}.html")
     except:  # noqa: E722
-        abort(404) 
+        abort(404)
 
 
 @app.route("/ar/")
@@ -29,6 +30,11 @@ def serve_static(filename="index.html"):
     return send_from_directory("ar", filename)
 
 
+@app.route("/game-status")
+def game_status():
+    return {"game_started": game_started}
+
+
 @socketio.on("join")
 def handle_join(data):
     global admin_sid
@@ -36,12 +42,9 @@ def handle_join(data):
     players[request.sid] = player_name
 
     if admin_sid is None:
-        admin_sid = request.sid  
+        admin_sid = request.sid
 
-    socketio.emit("players_update", {
-        "players": players,
-        "admin": admin_sid
-    })
+    socketio.emit("players_update", {"players": players, "admin": admin_sid})
 
 
 @socketio.on("disconnect")
@@ -51,13 +54,9 @@ def handle_disconnect():
         del players[request.sid]
 
     if request.sid == admin_sid:
-        
         admin_sid = next(iter(players), None)
 
-    socketio.emit("players_update", {
-        "players": players,
-        "admin": admin_sid
-    })
+    socketio.emit("players_update", {"players": players, "admin": admin_sid})
 
 
 @socketio.on("kick_player")
@@ -69,6 +68,10 @@ def kick_player(sid_to_kick):
 
 @socketio.on("start_game")
 def start_game():
+    global game_started
+    if request.sid != admin_sid:
+        return
+    game_started = True
     socketio.emit("game_started")
 
 
@@ -76,17 +79,13 @@ def start_game():
 def handle_kick_player(data):
     global admin_sid
     if request.sid != admin_sid:
-        return  
+        return
 
     player_id = data.get("id")
     if player_id in players:
-        socketio.emit("kicked", room=player_id) 
+        socketio.emit("kicked", room=player_id)
         del players[player_id]
-        socketio.emit("players_update", {
-            "players": players,
-            "admin": admin_sid
-        })
-
+        socketio.emit("players_update", {"players": players, "admin": admin_sid})
 
 
 if __name__ == "__main__":
