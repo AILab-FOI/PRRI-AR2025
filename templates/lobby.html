@@ -69,6 +69,12 @@
     li button:hover {
       background: #cc0044;
     }
+    
+    .mute {
+      margin-top: 24px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -78,10 +84,8 @@
     <h1>Lobby</h1>
     <div id="players">Waiting for players...</div>
     <button id="start_button">START GAME</button>
+    <div class="mute" id="mute-toggle">🔊</div>
   </div>
-</div>
-<div class="mute" id="mute-toggle">🔊</div>
-</div>
   <script>
     const music = document.getElementById("bg-music");
       const muteButton = document.getElementById("mute-toggle");
